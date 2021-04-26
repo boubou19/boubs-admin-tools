@@ -1,3 +1,4 @@
 admintools.command.synthax.error=An error has occured, please check the synthax.
-admintools.command.tps.worldNotFound=World not found, if you are sure it exists, contact an OP.
+admintools.command.worldNotFound=World not found, if you are sure it exists, contact an OP.
 admintools.command.tps.syntax=/at_tps [<dim ID>]
+admintools.command.testats.syntax=/at_testats [<dim ID>]

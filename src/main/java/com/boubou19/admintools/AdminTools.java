@@ -2,8 +2,6 @@ package com.boubou19.admintools;
 
 import com.boubou19.admintools.commands.CommandHandler;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
-import cpw.mods.fml.server.FMLServerHandler;
-import net.minecraft.init.Blocks;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -26,6 +24,10 @@ public class AdminTools
     public static final String VERSION = "${version}";
     public static MinecraftServer server;
     public static final Logger log = LogManager.getLogger(MODID);
+    //public static final Path TPSFile = Paths.get(FMLServerHandler.instance().getSavesDirectory() + File.separator + "logs" +File.separator + "tps.log");
+    //public static final Path TEStatsFile = Paths.get(FMLServerHandler.instance().getSavesDirectory() + File.separator + "logs" +File.separator + "te_stats.log");
+    public static final Path TPSFile = Paths.get("." + File.separator + "logs" + File.separator + "tps.log");
+    public static final Path TEStatsFile = Paths.get("." + File.separator + "logs" + File.separator + "te_stats.log");
     @EventHandler
     public void init(FMLInitializationEvent event)
     {
@@ -38,9 +40,8 @@ public class AdminTools
         CommandHandler.initCommands(event);
     }
 
-    public static void writeToDedicatedLogFile(List<String> lines){
+    public static void writeToDedicatedLogFile(Path file, List<String> lines){
 
-        Path file = Paths.get(FMLServerHandler.instance().getSavesDirectory() + File.separator + "logs" +File.separator + "tps.log");
         try {
             Files.write(file, lines, StandardCharsets.UTF_8);
         }

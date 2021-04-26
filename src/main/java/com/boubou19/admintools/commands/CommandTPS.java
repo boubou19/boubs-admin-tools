@@ -6,15 +6,15 @@ import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.world.World;
-
-
-import javax.swing.text.html.parser.Entity;
 import java.text.DecimalFormat;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.ArrayList;
 
 public class CommandTPS implements ICommand {
 
@@ -58,8 +58,7 @@ public class CommandTPS implements ICommand {
     }
 
     public String getCommandUsage(ICommandSender commandSender) {
-        commandSender.addChatMessage(new ChatComponentTranslation("admintools.command.tps.syntax"));
-        return "";
+        return "admintools.command." + getCommandName() + ".syntax";
     }
     public String getCommandName() {
 
@@ -128,8 +127,6 @@ public class CommandTPS implements ICommand {
             tickms = entry.getKey();
             tps = getTps(tickms);
 
-            StringBuilder stringBuilder = new StringBuilder();
-
             String[] messageContent = new String[]{
                     entryValue[1],
                     " [",
@@ -146,22 +143,17 @@ public class CommandTPS implements ICommand {
                     entryValue[4],
                     "."
             };
-            for (String str : messageContent){
-                stringBuilder.append(str);
-            }
-            if (!(
-                    sender.getCommandSenderName().equals("Server") ||
-                    sender.getCommandSenderName().equals("@")
-            )){
-                chatMessage = new ChatComponentText(stringBuilder.toString());
+
+            String stat = Utils.buildString(messageContent);
+            if (!Utils.isServerSendingCommand(sender)){
+                chatMessage = new ChatComponentText(stat);
                 sender.addChatMessage(chatMessage);
             }
             else{
-                tpsOutput.add(stringBuilder.toString());
+                tpsOutput.add(stat);
             }
         }
         tps = getTps(totalTickTime);
-        StringBuilder stringBuilder = new StringBuilder();
         String[] messageContent = new String[]{
                 "Overall: ",
                 floatfmt.format(tps),
@@ -178,20 +170,15 @@ public class CommandTPS implements ICommand {
                 "."
         };
 
-        for (String str : messageContent){
-            stringBuilder.append(str);
-        }
+        String stat = Utils.buildString(messageContent);
 
-        if (!(
-                sender.getCommandSenderName().equals("Server") ||
-                sender.getCommandSenderName().equals("@")
-        )){
-            chatMessage = new ChatComponentText(stringBuilder.toString());
+        if (!Utils.isServerSendingCommand(sender)){
+            chatMessage = new ChatComponentText(stat);
             sender.addChatMessage(chatMessage);
         }
         else{
-            tpsOutput.add(stringBuilder.toString());
-            AdminTools.writeToDedicatedLogFile(tpsOutput);
+            tpsOutput.add(stat);
+            AdminTools.writeToDedicatedLogFile(AdminTools.TPSFile, tpsOutput);
         }
     }
 
