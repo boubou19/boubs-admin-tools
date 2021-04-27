@@ -1,10 +1,10 @@
 package com.boubou19.admintools;
 
 import com.boubou19.admintools.commands.CommandHandler;
-import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import net.minecraft.server.MinecraftServer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -29,6 +29,7 @@ public class AdminTools
     public static final Path TPSFile = Paths.get("." + File.separator + "logs" + File.separator + "tps.log");
     public static final Path TEStatsFile = Paths.get("." + File.separator + "logs" + File.separator + "te_stats.log");
     public static final Path EStatsFile = Paths.get("." + File.separator + "logs" + File.separator + "e_stats.log");
+    public static final Path CLocationFile = Paths.get("." + File.separator + "logs" + File.separator + "c_location.log");
     public static final Path ELocationFile = Paths.get("." + File.separator + "logs" + File.separator + "e_location.log");
     public static final Path TELocationFile = Paths.get("." + File.separator + "logs" + File.separator + "te_location.log");
     @EventHandler

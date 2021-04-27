@@ -5,3 +5,4 @@ admintools.command.testats.syntax=/at_testats <dim ID>
 admintools.command.estats.syntax=/at_estats <dim ID>
 admintools.command.telocation.syntax=/at_telocation <dim ID> [<filter>]
 admintools.command.elocation.syntax=/at_elocation <dim ID> [<filter>]
+admintools.command.clocation.syntax=/at_clocation <dim ID> [<filter>]

@@ -8,6 +8,7 @@ public class CommandHandler {
         event.registerServerCommand(CommandTPS.instance);
         event.registerServerCommand(CommandTELocation.instance);
         event.registerServerCommand(CommandELocation.instance);
+        event.registerServerCommand(CommandCLocation.instance);
         event.registerServerCommand(CommandTEStats.instance);
         event.registerServerCommand(CommandEStats.instance);
     }

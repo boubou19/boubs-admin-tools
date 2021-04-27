@@ -1,59 +1,32 @@
 package com.boubou19.admintools.commands;
 
 import com.boubou19.admintools.AdminTools;
+import com.boubou19.admintools.commands.base.CommandBaseLocation;
 import com.google.common.base.Throwables;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
-import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.util.IChatComponent;
-import net.minecraft.world.World;
 import net.minecraft.entity.Entity;
-import java.util.*;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.world.World;
 
-public class CommandELocation implements ICommand {
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 
-    public static CommandELocation instance = new CommandELocation();
+public class CommandELocation extends CommandBaseLocation{
 
-    public int compareTo(ICommand p_compareTo_1_)
-    {
-        return this.getCommandName().compareTo(p_compareTo_1_.getCommandName());
+    public CommandELocation(){
+        dumpPath = AdminTools.ELocationFile;
+        commandName = "elocation";
+        commandAliases = Arrays.asList(new String[]{"at_elocation"});
+        dumpType = "entity";
     }
 
-    public int compareTo(Object p_compareTo_1_)
-    {
-        return this.compareTo((ICommand)p_compareTo_1_);
-    }
-
-    public String getCommandUsage(ICommandSender commandSender) {
-        return "admintools.command." + getCommandName() + ".syntax";
-    }
-
-    public String getCommandName() {
-
-        return "elocation";
-    }
-
-    public int getRequiredPermissionLevel(){
-        return 2;
-    }
-
-    public boolean canCommandSenderUseCommand(ICommandSender commandSender){
-        return commandSender.canCommandSenderUseCommand(this.getRequiredPermissionLevel(), this.getCommandName());
-    }
-
-    public List getCommandAliases(){
-        return Arrays.asList(new String[]{"at_elocation"});
-    }
-
-    private void getStats (ICommandSender sender, String dimID){
-        getStats(sender, dimID, "");
-    }
-
-    private void getStats (ICommandSender sender, String dimID, String filter){
+    @Override
+    protected List<String> getStats (ICommandSender sender, String dimID, String filter){
         boolean noFilter = filter.equals("");
         int dim = 0;
         try {
@@ -92,41 +65,7 @@ public class CommandELocation implements ICommand {
             }
         }
 
-        IChatComponent chatMessage = new ChatComponentText("entity dump performed");
-        sender.addChatMessage(chatMessage);
-        AdminTools.writeToDedicatedLogFile(AdminTools.ELocationFile, entityDataList);
-
-
-
-
-    }
-
-    public void processCommand(ICommandSender sender, String[] arguments) {
-
-        if (arguments.length == 1) {
-            getStats(sender, arguments[0]);
-        } else if (arguments.length == 2) {
-            getStats(sender, arguments[0], arguments[1]);
-        } else {
-            sender.addChatMessage(new ChatComponentTranslation(getCommandUsage(sender)));
-        }
-    }
-
-    public List<String> addTabCompletionOptions(ICommandSender sender, String[] args) {
-
-        if (args.length == 1) {
-            List<String> worldIDs = new ArrayList<String>();
-            for (World world : AdminTools.server.worldServers) {
-                worldIDs.add(Integer.toString(world.provider.dimensionId));
-            }
-            return CommandBase.getListOfStringsMatchingLastWord(args, worldIDs.toArray(new String[] { "" }));
-        }
-        return null;
-    }
-
-    public boolean isUsernameIndex(String[] p_82358_1_, int p_82358_2_)
-    {
-        return false;
+        return entityDataList;
     }
 }
 
