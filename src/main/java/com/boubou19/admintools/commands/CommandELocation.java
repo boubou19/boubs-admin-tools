@@ -5,6 +5,7 @@ import com.boubou19.admintools.commands.base.CommandBaseLocation;
 import com.google.common.base.Throwables;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
+import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -17,6 +18,8 @@ import java.util.Iterator;
 import java.util.List;
 
 public class CommandELocation extends CommandBaseLocation{
+
+    public static final ICommand instance = new CommandELocation();
 
     public CommandELocation(){
         dumpPath = AdminTools.ELocationFile;

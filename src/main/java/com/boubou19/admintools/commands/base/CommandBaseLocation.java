@@ -13,6 +13,10 @@ import java.util.List;
 public class CommandBaseLocation extends CommandBase {
     protected String dumpType;
 
+    protected void setDumpType(String dumpType) {
+        this.dumpType = dumpType;
+    }
+
     @Override
     public void processCommand(ICommandSender sender, String[] arguments) {
         if (arguments.length == 1) {

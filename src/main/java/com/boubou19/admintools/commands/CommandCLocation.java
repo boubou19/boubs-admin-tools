@@ -5,6 +5,7 @@ import com.boubou19.admintools.commands.base.CommandBaseLocation;
 import com.google.common.base.Throwables;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
+import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.world.World;
@@ -18,6 +19,7 @@ import java.util.List;
 
 
 public class CommandCLocation extends CommandBaseLocation {
+    public static final ICommand instance = new CommandCLocation();
     public CommandCLocation() {
         dumpPath = AdminTools.CLocationFile;
         commandName = "clocation";
@@ -43,7 +45,7 @@ public class CommandCLocation extends CommandBaseLocation {
 
         List<String> chunkDataList = null;
 
-        if (world.getChunkProvider() instanceof ChunkProviderServer) {
+        if (!(world.getChunkProvider() instanceof ChunkProviderServer)) {
             return chunkDataList;
         }
 
