@@ -50,7 +50,11 @@ public class CommandELocation implements ICommand {
     }
 
     private void getStats (ICommandSender sender, String dimID){
+        getStats(sender, dimID, "");
+    }
 
+    private void getStats (ICommandSender sender, String dimID, String filter){
+        boolean filtering = filter.equals("");
         int dim = 0;
         try {
             dim = CommandBase.parseInt(sender, dimID);
@@ -76,7 +80,14 @@ public class CommandELocation implements ICommand {
                 String entityData = Utils.buildString(new String[] {
                     key, " at: ", Double.toString(e.posX), ", ", Double.toString(e.posY), " ,", Double.toString(e.posZ)
                 });
-                entityDataList.add(entityData);
+                if (!filtering){
+                    entityDataList.add(entityData);
+                } else{
+                    if (key.contains(filter)){
+                        entityDataList.add(entityData);
+                    }
+                }
+
             }
         }
 
@@ -91,10 +102,12 @@ public class CommandELocation implements ICommand {
 
     public void processCommand(ICommandSender sender, String[] arguments) {
 
-        if (arguments.length != 1) {
-            sender.addChatMessage(new ChatComponentTranslation(getCommandUsage(sender)));
-        } else {
+        if (arguments.length == 1) {
             getStats(sender, arguments[0]);
+        } else if (arguments.length == 2) {
+            getStats(sender, arguments[0], arguments[1]);
+        } else {
+            sender.addChatMessage(new ChatComponentTranslation(getCommandUsage(sender)));
         }
     }
 
