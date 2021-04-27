@@ -12,7 +12,6 @@ import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.world.World;
 
-import java.text.DecimalFormat;
 import java.util.*;
 
 public class CommandTEStats implements ICommand {

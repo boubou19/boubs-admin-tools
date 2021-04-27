@@ -10,13 +10,13 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.world.World;
+import net.minecraft.entity.Entity;
 
-import javax.swing.text.html.parser.Entity;
 import java.util.*;
 
 public class CommandEStats implements ICommand {
 
-    public static CommandTEStats instance = new CommandTEStats();
+    public static CommandEStats instance = new CommandEStats();
 
     public int compareTo(ICommand p_compareTo_1_)
     {

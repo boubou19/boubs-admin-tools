@@ -10,14 +10,13 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IChatComponent;
-import net.minecraft.util.Util;
 import net.minecraft.world.World;
 import net.minecraft.entity.Entity;
 import java.util.*;
 
 public class CommandELocation implements ICommand {
 
-    public static CommandTEStats instance = new CommandTEStats();
+    public static CommandELocation instance = new CommandELocation();
 
     public int compareTo(ICommand p_compareTo_1_)
     {
