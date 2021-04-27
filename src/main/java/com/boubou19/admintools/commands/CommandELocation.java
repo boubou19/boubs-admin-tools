@@ -54,7 +54,7 @@ public class CommandELocation implements ICommand {
     }
 
     private void getStats (ICommandSender sender, String dimID, String filter){
-        boolean filtering = filter.equals("");
+        boolean noFilter = filter.equals("");
         int dim = 0;
         try {
             dim = CommandBase.parseInt(sender, dimID);
@@ -73,17 +73,18 @@ public class CommandELocation implements ICommand {
 
         while (iterator.hasNext()){
 
-             Entity e = (Entity) iterator.next();
+            Entity e = (Entity) iterator.next();
             if (e instanceof EntityLivingBase) {
                 e = (EntityLivingBase) e;
                 String key = e.getClass().toString();
+                AdminTools.log.info(key.toLowerCase()+", "+filter.toLowerCase());
                 String entityData = Utils.buildString(new String[] {
                     key, " at: ", Double.toString(e.posX), ", ", Double.toString(e.posY), " ,", Double.toString(e.posZ)
                 });
-                if (!filtering){
+                if (noFilter){
                     entityDataList.add(entityData);
                 } else{
-                    if (key.contains(filter)){
+                    if (key.toLowerCase().contains(filter.toLowerCase())){
                         entityDataList.add(entityData);
                     }
                 }

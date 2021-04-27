@@ -30,6 +30,7 @@ public class AdminTools
     public static final Path TEStatsFile = Paths.get("." + File.separator + "logs" + File.separator + "te_stats.log");
     public static final Path EStatsFile = Paths.get("." + File.separator + "logs" + File.separator + "e_stats.log");
     public static final Path ELocationFile = Paths.get("." + File.separator + "logs" + File.separator + "e_location.log");
+    public static final Path TELocationFile = Paths.get("." + File.separator + "logs" + File.separator + "te_location.log");
     @EventHandler
     public void init(FMLInitializationEvent event)
     {

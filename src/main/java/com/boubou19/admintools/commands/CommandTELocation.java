@@ -57,7 +57,7 @@ public class CommandTELocation implements ICommand {
         getStats(sender, dimID, "");
     }
     private void getStats (ICommandSender sender, String dimID, String filter){
-        boolean filtering = filter.equals("");
+        boolean noFilter = filter.equals("");
         int dim = 0;
         try {
             dim = CommandBase.parseInt(sender, dimID);
@@ -76,27 +76,25 @@ public class CommandTELocation implements ICommand {
 
         while (iterator.hasNext()){
 
-             TileEntity e = (TileEntity) iterator.next();
+            TileEntity e = (TileEntity) iterator.next();
+            String key = e.getClass().toString();
 
-
-                String key = e.getClass().toString();
-
-                String tileEntityData = Utils.buildString(new String[] {
-                    key, " at: ", Double.toString(e.xCoord), ", ", Double.toString(e.yCoord), " ,", Double.toString(e.zCoord)
-                });
-                if (!filtering) {
+            String tileEntityData = Utils.buildString(new String[] {
+                key, " at: ", Double.toString(e.xCoord), ", ", Double.toString(e.yCoord), " ,", Double.toString(e.zCoord)
+            });
+            if (noFilter) {
+                tileEntityDataList.add(tileEntityData);
+            }
+            else{
+                if (key.toLowerCase().contains(filter.toLowerCase())){
                     tileEntityDataList.add(tileEntityData);
                 }
-                else{
-                    if (key.contains(filter)){
-                        tileEntityDataList.add(tileEntityData);
-                    }
-                }
+            }
         }
 
         IChatComponent chatMessage = new ChatComponentText("tile entity dump performed");
         sender.addChatMessage(chatMessage);
-        AdminTools.writeToDedicatedLogFile(AdminTools.ELocationFile, tileEntityDataList);
+        AdminTools.writeToDedicatedLogFile(AdminTools.TELocationFile, tileEntityDataList);
 
 
 
