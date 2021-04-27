@@ -6,16 +6,15 @@ import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.world.World;
 
-import java.text.DecimalFormat;
+import javax.swing.text.html.parser.Entity;
 import java.util.*;
 
-public class CommandTEStats implements ICommand {
+public class CommandEStats implements ICommand {
 
     public static CommandTEStats instance = new CommandTEStats();
 
@@ -35,7 +34,7 @@ public class CommandTEStats implements ICommand {
 
     public String getCommandName() {
 
-        return "testats";
+        return "estats";
     }
 
     public int getRequiredPermissionLevel(){
@@ -47,7 +46,7 @@ public class CommandTEStats implements ICommand {
     }
 
     public List getCommandAliases(){
-        return Arrays.asList(new String[]{"at_testats"});
+        return Arrays.asList(new String[]{"at_estats"});
     }
 
     private void getStats (ICommandSender sender, String dimID){
@@ -65,20 +64,20 @@ public class CommandTEStats implements ICommand {
         if (world == null) {
             throw new CommandException("admintools.command.worldNotFound");
         }
-        Iterator iterator = world.loadedTileEntityList.iterator();
-        Map<String, Integer> TEStats = new TreeMap<String, Integer>();
+        Iterator iterator = world.loadedEntityList.iterator();
+        Map<String, Integer> EStats = new TreeMap<String, Integer>();
         while (iterator.hasNext()){
-            TileEntity te = (TileEntity) iterator.next();
-            String key = te.getClass().toString();
+            Entity e = (Entity) iterator.next();
+            String key = e.getClass().toString();
 
-            int counter = TEStats.getOrDefault(key, 0);
-            TEStats.put(key, counter+1);
+            int counter = EStats.getOrDefault(key, 0);
+            EStats.put(key, counter+1);
         }
 
         List<String> statsOutput = new ArrayList<String>();
 
 
-        for (Map.Entry<String, Integer> entry : TEStats.entrySet()){
+        for (Map.Entry<String, Integer> entry : EStats.entrySet()){
             String stat = Utils.buildString(new String[]{entry.getKey(), ": ", Integer.toString(entry.getValue())});
             if (!Utils.isServerSendingCommand(sender)){
                 IChatComponent chatMessage = new ChatComponentText(stat);
@@ -89,7 +88,7 @@ public class CommandTEStats implements ICommand {
             }
 
             if (statsOutput.size() > 0){
-                AdminTools.writeToDedicatedLogFile(AdminTools.TEStatsFile, statsOutput);
+                AdminTools.writeToDedicatedLogFile(AdminTools.EStatsFile, statsOutput);
             }
 
         }
@@ -124,3 +123,4 @@ public class CommandTEStats implements ICommand {
         return false;
     }
 }
+
