@@ -1,13 +1,10 @@
 package com.boubou19.admintools.commands;
 
 import com.boubou19.admintools.AdminTools;
-import com.boubou19.admintools.commands.base.CommandBaseLocation;
-import com.google.common.base.Throwables;
-import net.minecraft.command.CommandBase;
+import com.boubou19.admintools.commands.base.CommandBaseStats;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
-import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.ChunkProviderServer;
@@ -18,7 +15,7 @@ import java.util.Iterator;
 import java.util.List;
 
 
-public class CommandCLocation extends CommandBaseLocation {
+public class CommandCLocation extends CommandBaseStats {
     public static final ICommand instance = new CommandCLocation();
     public CommandCLocation() {
         dumpPath = AdminTools.CLocationFile;
@@ -29,14 +26,7 @@ public class CommandCLocation extends CommandBaseLocation {
 
     @Override
     protected List<String> getStats(ICommandSender sender, String dimID, String filter){
-        int dim = 0;
-        try {
-            dim = CommandBase.parseInt(sender, dimID);
-        } catch (Throwable e) {
-            sender.addChatMessage(new ChatComponentTranslation("admintools.command.synthax.error"));
-            sender.addChatMessage(new ChatComponentTranslation(getCommandUsage(sender)));
-            Throwables.propagate(e);
-        }
+        int dim = parseDim(sender, dimID);
 
         World world = AdminTools.server.worldServerForDimension(dim);
         if (world == null) {

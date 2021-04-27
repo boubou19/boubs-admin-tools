@@ -1,6 +1,7 @@
 package com.boubou19.admintools.commands.base;
 
 import com.boubou19.admintools.AdminTools;
+import com.google.common.base.Throwables;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
@@ -10,11 +11,19 @@ import net.minecraft.world.World;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CommandBaseLocation extends CommandBase {
+public class CommandBaseStats extends CommandBase {
     protected String dumpType;
 
-    protected void setDumpType(String dumpType) {
-        this.dumpType = dumpType;
+    protected int parseDim(ICommandSender sender, String dimID){
+        int dim = 0;
+        try {
+            dim = net.minecraft.command.CommandBase.parseInt(sender, dimID);
+        } catch (Throwable e) {
+            sender.addChatMessage(new ChatComponentTranslation("admintools.command.synthax.error"));
+            sender.addChatMessage(new ChatComponentTranslation(getCommandUsage(sender)));
+            Throwables.propagate(e);
+        }
+        return dim;
     }
 
     @Override
