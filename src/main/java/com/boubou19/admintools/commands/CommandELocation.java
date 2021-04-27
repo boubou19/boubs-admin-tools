@@ -40,22 +40,20 @@ public class CommandELocation extends CommandBaseStats {
         while (iterator.hasNext()){
 
             Entity e = (Entity) iterator.next();
-            if (e instanceof EntityLivingBase) {
-                e = (EntityLivingBase) e;
-                String key = e.getClass().toString();
-                AdminTools.log.info(key.toLowerCase()+", "+filter.toLowerCase());
-                String entityData = Utils.buildString(new String[] {
-                    key, " at: ", Double.toString(e.posX), ", ", Double.toString(e.posY), " ,", Double.toString(e.posZ)
-                });
-                if (noFilter){
+            String key = e.getClass().toString();
+            AdminTools.log.info(key.toLowerCase()+", "+filter.toLowerCase());
+            String entityData = Utils.buildString(new String[] {
+                key, " at: ", Double.toString(e.posX), ", ", Double.toString(e.posY), " ,", Double.toString(e.posZ)
+            });
+            if (noFilter){
+                entityDataList.add(entityData);
+            } else{
+                if (key.toLowerCase().contains(filter.toLowerCase())){
                     entityDataList.add(entityData);
-                } else{
-                    if (key.toLowerCase().contains(filter.toLowerCase())){
-                        entityDataList.add(entityData);
-                    }
                 }
-
             }
+
+
         }
 
         return entityDataList;
