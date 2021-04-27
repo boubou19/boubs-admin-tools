@@ -56,7 +56,7 @@ public class CommandELocation implements ICommand {
             dim = CommandBase.parseInt(sender, dimID);
         } catch (Throwable e) {
             sender.addChatMessage(new ChatComponentTranslation("admintools.command.synthax.error"));
-            sender.addChatMessage(new ChatComponentTranslation("admintools.command." + getCommandName() + ".syntax"));
+            sender.addChatMessage(new ChatComponentTranslation(getCommandUsage(sender)));
             Throwables.propagate(e);
         }
 
@@ -92,7 +92,7 @@ public class CommandELocation implements ICommand {
     public void processCommand(ICommandSender sender, String[] arguments) {
 
         if (arguments.length != 1) {
-            sender.addChatMessage(new ChatComponentTranslation("admintools.command." + getCommandName() + ".syntax"));
+            sender.addChatMessage(new ChatComponentTranslation(getCommandUsage(sender)));
         } else {
             getStats(sender, arguments[0]);
         }

@@ -100,7 +100,7 @@ public class CommandEStats implements ICommand {
     public void processCommand(ICommandSender sender, String[] arguments) {
 
         if (arguments.length != 1) {
-            sender.addChatMessage(new ChatComponentTranslation("admintools.command." + getCommandName() + ".syntax"));
+            sender.addChatMessage(new ChatComponentTranslation(getCommandUsage(sender)));
         } else {
             getStats(sender, arguments[0]);
         }

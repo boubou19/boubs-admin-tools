@@ -22,7 +22,6 @@ import java.util.List;
 public class CommandTELocation implements ICommand {
 
     public static CommandTELocation instance = new CommandTELocation();
-
     public int compareTo(ICommand p_compareTo_1_)
     {
         return this.getCommandName().compareTo(p_compareTo_1_.getCommandName());
@@ -64,7 +63,7 @@ public class CommandTELocation implements ICommand {
             dim = CommandBase.parseInt(sender, dimID);
         } catch (Throwable e) {
             sender.addChatMessage(new ChatComponentTranslation("admintools.command.synthax.error"));
-            sender.addChatMessage(new ChatComponentTranslation("admintools.command." + getCommandName() + ".syntax"));
+            sender.addChatMessage(new ChatComponentTranslation(getCommandUsage(sender)));
             Throwables.propagate(e);
         }
 
@@ -113,7 +112,7 @@ public class CommandTELocation implements ICommand {
             getStats(sender, arguments[0], arguments[1]);
         }
         else {
-            sender.addChatMessage(new ChatComponentTranslation("admintools.command." + getCommandName() + ".syntax"));
+            sender.addChatMessage(new ChatComponentTranslation(getCommandUsage(sender)));
         }
     }
 
