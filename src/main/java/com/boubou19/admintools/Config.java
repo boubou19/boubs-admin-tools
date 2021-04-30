@@ -23,11 +23,11 @@ public class Config {
     public void initConfiguration(String rootInstance){
         cfgPath = Paths.get(rootInstance, "config", "boubsAdminTools.cfg").toString();
         this.rootInstance = rootInstance;
-        loadConfiguration(cfgPath);
+        loadConfiguration();
 
     }
 
-    public void loadConfiguration(String cfgPath){
+    public void loadConfiguration(){
         config = new Configuration(new File(cfgPath));
         String logPathString = config.get("log paths", "log path", defaultLogPath, "where the logs should be located. If the path is not valid, it will fall back to '"+defaultLogPath+"'").getString();
         EStatsPath = Paths.get(rootInstance, logPathString, "e_stats.log").toAbsolutePath();

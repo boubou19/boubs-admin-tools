@@ -1,10 +1,10 @@
 package com.boubou19.admintools.commands;
 
 import com.boubou19.admintools.AdminTools;
+import com.boubou19.admintools.commands.base.CommandBaseStats;
 import com.google.common.base.Throwables;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
-import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
@@ -13,11 +13,18 @@ import net.minecraft.world.World;
 import java.text.DecimalFormat;
 import java.util.*;
 
-public class CommandTPS implements ICommand {
+public class CommandTPS extends CommandBaseStats {
 
-    public static CommandTPS instance = new CommandTPS();
+    public static CommandBaseStats instance = new CommandTPS();
 
     private static DecimalFormat floatfmt = new DecimalFormat("##0.00");
+
+    public CommandTPS() {
+        dumpPath = AdminTools.configuration.TPSPath;
+        commandName = "tps";
+        commandAliases = Arrays.asList(new String[]{"at_tps"});
+        dumpType = "TPS";
+    }
 
     private double getTickTimeSum(long[] times) {
 
@@ -34,40 +41,13 @@ public class CommandTPS implements ICommand {
 
     private double getTickMs(World world) {
 
-        return getTickTimeSum(world == null ? AdminTools.server.tickTimeArray : (long[]) AdminTools.server.worldTickTimes.get(Integer
-                .valueOf(world.provider.dimensionId))) * 1.0E-006D;
-    }
-
-    public int compareTo(ICommand p_compareTo_1_)
-    {
-        return this.getCommandName().compareTo(p_compareTo_1_.getCommandName());
-    }
-
-    public int compareTo(Object p_compareTo_1_)
-    {
-        return this.compareTo((ICommand)p_compareTo_1_);
+        return getTickTimeSum(world == null ? AdminTools.server.tickTimeArray : (long[]) AdminTools.server.worldTickTimes.get(world.provider.dimensionId)) * 1.0E-006D;
     }
 
     private double getTps(double tickTimeMS) {
 
         double tps = 1000.0D / tickTimeMS;
         return tps > 20.0D ? 20.0D : tps;
-    }
-
-    public String getCommandUsage(ICommandSender commandSender) {
-        return "admintools.command." + getCommandName() + ".syntax";
-    }
-    public String getCommandName() {
-
-        return "tps";
-    }
-
-    public int getRequiredPermissionLevel(){
-        return 2;
-    }
-
-    public boolean canCommandSenderUseCommand(ICommandSender commandSender){
-        return commandSender.canCommandSenderUseCommand(this.getRequiredPermissionLevel(), this.getCommandName());
     }
 
     public List getCommandAliases(){
@@ -221,7 +201,6 @@ public class CommandTPS implements ICommand {
 
         ChatComponentText chatMessage = new ChatComponentText(stringBuilder.toString());
         sender.addChatMessage(chatMessage);
-
     }
 
     public void processCommand(ICommandSender sender, String[] arguments) {
@@ -231,22 +210,5 @@ public class CommandTPS implements ICommand {
         } else {
             tpsDim(sender, arguments[0]);
             }
-    }
-
-    public List<String> addTabCompletionOptions(ICommandSender sender, String[] args) {
-
-        if (args.length == 1) {
-            List<String> worldIDs = new ArrayList<String>();
-            for (World world : AdminTools.server.worldServers) {
-                worldIDs.add(Integer.toString(world.provider.dimensionId));
-            }
-            return CommandBase.getListOfStringsMatchingLastWord(args, worldIDs.toArray(new String[] { "" }));
-        }
-        return null;
-    }
-
-    public boolean isUsernameIndex(String[] p_82358_1_, int p_82358_2_)
-    {
-        return false;
     }
 }

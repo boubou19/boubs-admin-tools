@@ -3,10 +3,8 @@ package com.boubou19.admintools.commands;
 import com.boubou19.admintools.AdminTools;
 import com.boubou19.admintools.commands.base.CommandBaseStats;
 import net.minecraft.command.CommandException;
-import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
@@ -16,7 +14,7 @@ import java.util.List;
 
 public class CommandELocation extends CommandBaseStats {
 
-    public static final ICommand instance = new CommandELocation();
+    public static final CommandBaseStats instance = new CommandELocation();
 
     public CommandELocation(){
         dumpPath = AdminTools.configuration.ELocationPath;

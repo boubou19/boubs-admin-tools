@@ -3,7 +3,6 @@ package com.boubou19.admintools.commands;
 import com.boubou19.admintools.AdminTools;
 import com.boubou19.admintools.commands.base.CommandBaseStats;
 import net.minecraft.command.CommandException;
-import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -15,7 +14,7 @@ import java.util.List;
 
 public class CommandTELocation extends CommandBaseStats {
 
-    public static final ICommand instance = new CommandTELocation();
+    public static final CommandBaseStats instance = new CommandTELocation();
 
     public CommandTELocation(){
         dumpPath = AdminTools.configuration.TELocationPath;

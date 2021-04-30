@@ -3,7 +3,6 @@ package com.boubou19.admintools.commands;
 import com.boubou19.admintools.AdminTools;
 import com.boubou19.admintools.commands.base.CommandBaseStats;
 import net.minecraft.command.CommandException;
-import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
@@ -16,7 +15,7 @@ import java.util.List;
 
 
 public class CommandCLocation extends CommandBaseStats {
-    public static final ICommand instance = new CommandCLocation();
+    public static final CommandBaseStats instance = new CommandCLocation();
     public CommandCLocation() {
         dumpPath = AdminTools.configuration.CLocationPath;
         commandName = "clocation";

@@ -13,7 +13,7 @@ import java.util.*;
 
 public class CommandTEStats extends CommandBaseStats {
 
-    public static CommandTEStats instance = new CommandTEStats();
+    public static CommandBaseStats instance = new CommandTEStats();
 
     public CommandTEStats() {
         dumpPath = AdminTools.configuration.TEStatsPath;
