@@ -18,7 +18,7 @@ import java.util.List;
 public class CommandCLocation extends CommandBaseStats {
     public static final ICommand instance = new CommandCLocation();
     public CommandCLocation() {
-        dumpPath = AdminTools.CLocationFile;
+        dumpPath = AdminTools.configuration.CLocationPath;
         commandName = "clocation";
         commandAliases = Arrays.asList(new String[]{"at_clocation"});
         dumpType = "chunk";

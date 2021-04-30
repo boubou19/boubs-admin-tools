@@ -19,7 +19,7 @@ public class CommandELocation extends CommandBaseStats {
     public static final ICommand instance = new CommandELocation();
 
     public CommandELocation(){
-        dumpPath = AdminTools.ELocationFile;
+        dumpPath = AdminTools.configuration.ELocationPath;
         commandName = "elocation";
         commandAliases = Arrays.asList(new String[]{"at_elocation"});
         dumpType = "entity";

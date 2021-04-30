@@ -16,7 +16,7 @@ public class CommandTEStats extends CommandBaseStats {
     public static CommandTEStats instance = new CommandTEStats();
 
     public CommandTEStats() {
-        dumpPath = AdminTools.TEStatsFile;
+        dumpPath = AdminTools.configuration.TEStatsPath;
         commandName = "testats";
         commandAliases = Arrays.asList(new String[]{"at_testats"});
         dumpType = "tile entity stats";

@@ -16,7 +16,7 @@ public class CommandEStats extends CommandBaseStats {
     public static CommandEStats instance = new CommandEStats();
 
     public CommandEStats(){
-        dumpPath = AdminTools.EStatsFile;
+        dumpPath = AdminTools.configuration.EStatsPath;
         commandName = "estats";
         commandAliases = Arrays.asList(new String[]{"at_estats"});
         dumpType = "entity stats";

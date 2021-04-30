@@ -18,7 +18,7 @@ public class CommandTELocation extends CommandBaseStats {
     public static final ICommand instance = new CommandTELocation();
 
     public CommandTELocation(){
-        dumpPath = AdminTools.TELocationFile;
+        dumpPath = AdminTools.configuration.TELocationPath;
         commandName = "telocation";
         commandAliases = Arrays.asList(new String[]{"at_telocation"});
         dumpType = "tile entity";

@@ -175,7 +175,7 @@ public class CommandTPS implements ICommand {
         }
         else{
             tpsOutput.add(stat);
-            AdminTools.writeToDedicatedLogFile(AdminTools.TPSFile, tpsOutput);
+            AdminTools.writeToDedicatedLogFile(AdminTools.configuration.TPSPath, tpsOutput);
         }
     }
 
