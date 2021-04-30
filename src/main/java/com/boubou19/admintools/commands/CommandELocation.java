@@ -41,7 +41,7 @@ public class CommandELocation extends CommandBaseStats {
             String key = e.getClass().toString();
             AdminTools.log.info(key.toLowerCase()+", "+filter.toLowerCase());
             String entityData = Utils.buildString(new String[] {
-                key, " at: ", Double.toString(e.posX), ", ", Double.toString(e.posY), " ,", Double.toString(e.posZ)
+                key, " at: ", Integer.toString((int) e.posX), " ", Integer.toString((int) e.posY), " ", Integer.toString((int) e.posZ)
             });
             if (noFilter){
                 entityDataList.add(entityData);

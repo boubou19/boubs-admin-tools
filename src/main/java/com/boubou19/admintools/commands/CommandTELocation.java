@@ -41,7 +41,7 @@ public class CommandTELocation extends CommandBaseStats {
             String key = e.getClass().toString();
 
             String tileEntityData = Utils.buildString(new String[] {
-                key, " at: ", Double.toString(e.xCoord), ", ", Double.toString(e.yCoord), " ,", Double.toString(e.zCoord)
+                key, " at: ", Integer.toString(e.xCoord), " ", Integer.toString(e.yCoord), " ", Integer.toString(e.zCoord)
             });
             if (noFilter) {
                 tileEntityDataList.add(tileEntityData);
