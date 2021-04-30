@@ -4,6 +4,7 @@ import com.boubou19.admintools.AdminTools;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 
+import java.io.File;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,11 @@ public class CommandBase implements ICommand{
     }
 
     protected void writeDump(List<String> dataList){
+        AdminTools.log.warn(dumpPath.toAbsolutePath().toString());
+        File folder = new File(dumpPath.getParent().toAbsolutePath().toString());
+        if (!folder.exists()){
+            folder.mkdirs();
+        }
         AdminTools.writeToDedicatedLogFile(dumpPath, dataList);
     }
 

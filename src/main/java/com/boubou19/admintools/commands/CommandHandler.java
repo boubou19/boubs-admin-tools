@@ -1,21 +1,17 @@
 package com.boubou19.admintools.commands;
 
-import com.boubou19.admintools.commands.base.CommandBaseStats;
+import com.boubou19.admintools.commands.base.CommandReload;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 
 public class CommandHandler {
-    public static CommandBaseStats[] commandArray = new CommandBaseStats[]{
-            CommandTPS.instance,
-            CommandTELocation.instance,
-            CommandELocation.instance,
-            CommandCLocation.instance,
-            CommandTEStats.instance,
-            CommandEStats.instance,
-    };
-
     public static void initCommands(FMLServerStartingEvent event) {
-        for (CommandBaseStats command : commandArray){
-            event.registerServerCommand(command.instance);
-        }
+
+        event.registerServerCommand(CommandTPS.instance);
+        event.registerServerCommand(CommandTELocation.instance);
+        event.registerServerCommand(CommandELocation.instance);
+        event.registerServerCommand(CommandCLocation.instance);
+        event.registerServerCommand(CommandTEStats.instance);
+        event.registerServerCommand(CommandEStats.instance);
+        event.registerServerCommand(CommandReload.instance);
     }
 }

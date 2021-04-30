@@ -54,12 +54,11 @@ public class CommandTPS extends CommandBaseStats {
         return Arrays.asList(new String[]{"at_tps"});
     }
 
-    private void tpsAll(ICommandSender sender){
+    private List<String> tpsAll(ICommandSender sender){
         double tickms;
         double tps;
         String dimId;
         String dimName;
-        String load;
         Map<Double, String[]> sortedTickTimeMap = new TreeMap<Double, String[]>();
         ChatComponentText chatMessage;
         List<String> tpsOutput = new ArrayList<String>();
@@ -70,9 +69,9 @@ public class CommandTPS extends CommandBaseStats {
         int totalWorlds = 0;
         double totalTickTime = 0;
 
-        int loadedChunks = 0;
-        int entities = 0;
-        int te = 0;
+        int loadedChunks;
+        int entities;
+        int te;
 
         for (World world : AdminTools.server.worldServers) {
             loadedChunks = world.getChunkProvider().getLoadedChunkCount();
@@ -126,10 +125,10 @@ public class CommandTPS extends CommandBaseStats {
                 chatMessage = new ChatComponentText(stat);
                 sender.addChatMessage(chatMessage);
             }
-            else{
-                tpsOutput.add(stat);
-            }
+
+            tpsOutput.add(stat);
         }
+
         tps = getTps(totalTickTime);
         String[] messageContent = new String[]{
                 "Overall: ",
@@ -148,15 +147,11 @@ public class CommandTPS extends CommandBaseStats {
         };
 
         String stat = Utils.buildString(messageContent);
+        chatMessage = new ChatComponentText(stat);
+        sender.addChatMessage(chatMessage);
+        tpsOutput.add(stat);
 
-        if (!Utils.isServerSendingCommand(sender)){
-            chatMessage = new ChatComponentText(stat);
-            sender.addChatMessage(chatMessage);
-        }
-        else{
-            tpsOutput.add(stat);
-            AdminTools.writeToDedicatedLogFile(AdminTools.configuration.TPSPath, tpsOutput);
-        }
+        return tpsOutput;
     }
 
     private void tpsDim(ICommandSender sender, String dimID){
@@ -195,18 +190,16 @@ public class CommandTPS extends CommandBaseStats {
                 ". Loaded TE: ",
                 Integer.toString(world.loadedTileEntityList.size())
         };
-        for (String str : messageContent){
-            stringBuilder.append(str);
-        }
 
-        ChatComponentText chatMessage = new ChatComponentText(stringBuilder.toString());
+        ChatComponentText chatMessage = new ChatComponentText(Utils.buildString(messageContent));
         sender.addChatMessage(chatMessage);
     }
 
     public void processCommand(ICommandSender sender, String[] arguments) {
 
         if (arguments.length < 1) {
-            tpsAll(sender);
+            List<String> tpsOutput = tpsAll(sender);
+            writeDump(tpsOutput, sender, dumpType);
         } else {
             tpsDim(sender, arguments[0]);
             }
