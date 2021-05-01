@@ -21,6 +21,12 @@ public class CommandTELocation extends CommandBaseStats {
         commandName = "telocation";
         commandAliases = Arrays.asList(new String[]{"at_telocation"});
         dumpType = "tile entity";
+        reloadPath();
+    }
+
+    @Override
+    public void reloadPath(){
+        dumpPath = AdminTools.configuration.TELocationPath;
     }
 
     @Override

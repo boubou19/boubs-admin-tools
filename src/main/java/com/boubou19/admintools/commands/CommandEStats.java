@@ -20,6 +20,12 @@ public class CommandEStats extends CommandBaseStats {
         commandName = "estats";
         commandAliases = Arrays.asList(new String[]{"at_estats"});
         dumpType = "entity stats";
+        reloadPath();
+    }
+
+    @Override
+    public void reloadPath(){
+        dumpPath = AdminTools.configuration.EStatsPath;
     }
 
     @Override

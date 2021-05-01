@@ -27,6 +27,15 @@ public class CommandBaseStats extends CommandBase {
     }
 
     @Override
+    public void reload(){
+        reloadPath();
+    }
+
+    public void reloadPath(){
+
+    }
+
+    @Override
     public void processCommand(ICommandSender sender, String[] arguments) {
         if (arguments.length == 1) {
             List<String> locations = getStats(sender, arguments[0]);

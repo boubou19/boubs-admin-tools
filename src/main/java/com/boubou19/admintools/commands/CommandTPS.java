@@ -24,6 +24,12 @@ public class CommandTPS extends CommandBaseStats {
         commandName = "tps";
         commandAliases = Arrays.asList(new String[]{"at_tps"});
         dumpType = "TPS";
+        reloadPath();
+    }
+
+    @Override
+    public void reloadPath(){
+        dumpPath = AdminTools.configuration.TPSPath;
     }
 
     private double getTickTimeSum(long[] times) {

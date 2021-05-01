@@ -21,6 +21,12 @@ public class CommandELocation extends CommandBaseStats {
         commandName = "elocation";
         commandAliases = Arrays.asList(new String[]{"at_elocation"});
         dumpType = "entity";
+        reloadPath();
+    }
+
+    @Override
+    public void reloadPath(){
+        dumpPath = AdminTools.configuration.ELocationPath;
     }
 
     @Override

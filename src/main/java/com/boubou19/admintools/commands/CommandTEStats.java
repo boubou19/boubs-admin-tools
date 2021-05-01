@@ -20,6 +20,12 @@ public class CommandTEStats extends CommandBaseStats {
         commandName = "testats";
         commandAliases = Arrays.asList(new String[]{"at_testats"});
         dumpType = "tile entity stats";
+        reloadPath();
+    }
+
+    @Override
+    public void reloadPath(){
+        dumpPath = AdminTools.configuration.TEStatsPath;
     }
 
     @Override

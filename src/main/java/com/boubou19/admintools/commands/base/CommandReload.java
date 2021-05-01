@@ -1,6 +1,7 @@
 package com.boubou19.admintools.commands.base;
 
 import com.boubou19.admintools.AdminTools;
+import com.boubou19.admintools.commands.CommandHandler;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.util.ChatComponentTranslation;
 
@@ -15,6 +16,7 @@ public class CommandReload extends CommandBase {
     }
     public void processCommand(ICommandSender sender, String[] arguments) {
         AdminTools.configuration.loadConfiguration();
+        CommandHandler.reloadCommands();
         sender.addChatMessage(new ChatComponentTranslation("admintools.config.reload.success"));
     }
 }

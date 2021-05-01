@@ -15,6 +15,10 @@ public class CommandBase implements ICommand{
     protected String commandName;
     protected List<String> commandAliases;
 
+    public void reload(){
+
+    }
+
     protected List<String> getStats (ICommandSender sender, String dimID){
         return getStats(sender, dimID, "");
     }

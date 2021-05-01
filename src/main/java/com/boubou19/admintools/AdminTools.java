@@ -25,7 +25,6 @@ public class AdminTools
     public static MinecraftServer server;
     public static final Logger log = LogManager.getLogger(MODID);
     public static Config configuration = new Config();
-    private int tickCounter = 0;
     public static final FakeCommandSender fakeCommandSender = new FakeCommandSender();
 
     @EventHandler
