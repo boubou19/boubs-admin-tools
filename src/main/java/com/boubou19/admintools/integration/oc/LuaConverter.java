@@ -3,6 +3,7 @@ package com.boubou19.admintools.integration.oc;
 import com.boubou19.admintools.AdminTools;
 
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 
 public class LuaConverter {
@@ -122,7 +123,7 @@ public class LuaConverter {
 
         List<String> tps = getLuaTPSTable(tpsTable);
         for (Path computer : computers){
-            AdminTools.writeToDedicatedLogFile(computer, tps);
+            AdminTools.writeToDedicatedLogFile(Paths.get(computer.toString(), "tps.lua"), tps);
         }
     }
 }

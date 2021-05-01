@@ -2,6 +2,7 @@ package com.boubou19.admintools.commands;
 
 import com.boubou19.admintools.AdminTools;
 import com.boubou19.admintools.commands.base.CommandBaseStats;
+import com.boubou19.admintools.integration.oc.LuaConverter;
 import com.google.common.base.Throwables;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
@@ -206,6 +207,7 @@ public class CommandTPS extends CommandBaseStats {
         if (arguments.length < 1) {
             List<String> tpsOutput = tpsAll(sender);
             writeDump(tpsOutput, sender, dumpType);
+            LuaConverter.processTps(tpsOutput, AdminTools.configuration.ocAdminPaths);
         } else {
             tpsDim(sender, arguments[0]);
             }

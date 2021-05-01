@@ -16,6 +16,7 @@ public class CommandReload extends CommandBase {
     }
     public void processCommand(ICommandSender sender, String[] arguments) {
         AdminTools.configuration.loadConfiguration();
+        AdminTools.configuration.loadAdminComputers();
         CommandHandler.reloadCommands();
         sender.addChatMessage(new ChatComponentTranslation("admintools.config.reload.success"));
     }

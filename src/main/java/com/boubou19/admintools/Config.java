@@ -52,6 +52,7 @@ public class Config {
             Path adminPath = Paths.get(computerDir.getAbsolutePath().toString(), "admin");
             if (new File(adminPath.toString()).exists()){
                 ocAdminPaths.add(adminPath);
+                AdminTools.log.info(adminPath.toAbsolutePath().toString()+" will receive dumps");
             }
         }
     }
