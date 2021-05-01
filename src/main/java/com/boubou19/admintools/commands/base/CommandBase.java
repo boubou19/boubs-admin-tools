@@ -25,7 +25,6 @@ public class CommandBase implements ICommand{
     }
 
     protected void writeDump(List<String> dataList){
-        AdminTools.log.warn(dumpPath.toAbsolutePath().toString());
         File folder = new File(dumpPath.getParent().toAbsolutePath().toString());
         if (!folder.exists()){
             folder.mkdirs();
