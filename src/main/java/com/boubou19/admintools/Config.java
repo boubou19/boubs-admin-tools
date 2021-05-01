@@ -19,6 +19,8 @@ public class Config {
     public Path ELocationPath;
     public Path TELocationPath;
     public Path TPSPath;
+    public int delaySecondBetween2Trigger;
+    public boolean useTPSCommand;
 
     public void initConfiguration(String rootInstance){
         cfgPath = Paths.get(rootInstance, "config", "boubsAdminTools.cfg").toString();
@@ -36,6 +38,8 @@ public class Config {
         ELocationPath = Paths.get(rootInstance, logPathString, "e_location.log").toAbsolutePath();
         TELocationPath = Paths.get(rootInstance, logPathString, "te_location.log").toAbsolutePath();
         TPSPath = Paths.get(rootInstance, logPathString, "tps.log").toAbsolutePath();
+        delaySecondBetween2Trigger = config.get("commands", "delay", 100, "Delay in seconds between 2 trigger of the commands").getInt();
+        useTPSCommand = config.get("commands", "use_tps_command", true, "if true enables regular tps triggers").getBoolean();
         config.save();
     }
 }
