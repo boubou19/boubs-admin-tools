@@ -13,7 +13,7 @@ public class LuaConverter {
             String[] s = new String[]{
                     "  [\"",
                     entryName,
-                    "\"]={[\"loaded entities\"]\"",
+                    "\"]={[\"loaded entities\"]=\"",
                     entry.get("loaded entities"),
                     "\", [\"name\"]=\"",
                     entry.get("name"),
@@ -29,7 +29,7 @@ public class LuaConverter {
 
         String[] s = new String[]{
                 "  [\""+entryName,
-                "\"]={[\"loaded entities\"]\"",
+                "\"]={[\"loaded entities\"]=\"",
                 entry.get("loaded entities"),
                 "\", [\"loaded dims\"]=\"",
                 entry.get("loaded dims"),
