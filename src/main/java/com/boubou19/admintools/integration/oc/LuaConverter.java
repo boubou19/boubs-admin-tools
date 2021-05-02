@@ -81,16 +81,17 @@ public class LuaConverter {
         loadedChunks = loadedChunksArray[loadedChunksArray.length - 1];
 
         loadedEntitiesArray = line[2].split(": ");
-        loadedEntities = loadedChunksArray[loadedEntitiesArray.length - 1];
+        loadedEntities = loadedEntitiesArray[loadedEntitiesArray.length - 1];
 
         loadedTEArray = line[3].replace(".", "").split(": ");
-        loadedTE = loadedChunksArray[loadedTEArray.length - 1];
+        loadedTE = loadedTEArray[loadedTEArray.length - 1];
 
         tpsEntry.put("tick time", tickTime);
         tpsEntry.put("loaded chunks", loadedChunks);
         tpsEntry.put("loaded entities", loadedEntities);
         tpsEntry.put("loaded tile entities", loadedTE);
-
+        AdminTools.log.warn("tick time "+tickTime+" loaded chunks "+loadedChunks+" loaded entities "+ loadedEntities + "loaded te "+loadedTE);
+        AdminTools.log.warn("line 1"+line[1]+"\nline 2"+line[2]+"\nline 3"+line[3]);
         if (!overall){
             tpsEntry.put("name", name);
         }
