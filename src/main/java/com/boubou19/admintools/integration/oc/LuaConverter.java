@@ -59,6 +59,7 @@ public class LuaConverter {
         String line = formatEntry(tpsMap.get(key), key, true);
         table.add(line);
         table.add("}");
+        table.add("return tps");
 
         return table;
     }
