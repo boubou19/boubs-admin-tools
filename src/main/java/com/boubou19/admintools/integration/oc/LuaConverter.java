@@ -90,8 +90,6 @@ public class LuaConverter {
         tpsEntry.put("loaded chunks", loadedChunks);
         tpsEntry.put("loaded entities", loadedEntities);
         tpsEntry.put("loaded tile entities", loadedTE);
-        AdminTools.log.warn("tick time "+tickTime+" loaded chunks "+loadedChunks+" loaded entities "+ loadedEntities + "loaded te "+loadedTE);
-        AdminTools.log.warn("line 1"+line[1]+"\nline 2"+line[2]+"\nline 3"+line[3]);
         if (!overall){
             tpsEntry.put("name", name);
         }
