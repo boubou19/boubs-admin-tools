@@ -3,7 +3,6 @@ package com.boubou19.admintools;
 import net.minecraftforge.common.config.Configuration;
 
 import java.io.File;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -24,9 +23,10 @@ public class Config {
     public Path TPSPath;
     public Path mapPath;
     public int delaySecondBetween2Trigger;
-    public boolean useTPSCommand;
+    public boolean useAutomatedCommands;
     public boolean mapPathSet;
     public List<Path> ocAdminPaths;
+    public String[] automatedCommands;
 
     public void initConfiguration(String rootInstance){
         cfgPath = Paths.get(rootInstance, "config", "boubsAdminTools.cfg").toString();
@@ -67,7 +67,7 @@ public class Config {
         TELocationPath = Paths.get(rootInstance, logPathString, "te_location.log").toAbsolutePath();
         TPSPath = Paths.get(rootInstance, logPathString, "tps.log").toAbsolutePath();
         delaySecondBetween2Trigger = config.get("commands", "delay", 100, "Delay in seconds between 2 trigger of the commands").getInt();
-        useTPSCommand = config.get("commands", "use_tps_command", true, "if true enables regular tps triggers").getBoolean();
+        useAutomatedCommands = config.get("commands", "use automated command", true, "if true enables automated commands triggers").getBoolean();
         String mapName = config.get("misc", "map name", "", "relative path to the map folder").getString();
         if(mapName.equals("")){
             AdminTools.log.warn("the map path has not been set, integration will not fully work");
@@ -78,6 +78,7 @@ public class Config {
             mapPath = Paths.get(rootInstance, mapName).toAbsolutePath();
             AdminTools.log.info("the map path has been set to: "+mapPath.toString());
         }
+        automatedCommands = config.get("commands", "command list", new String[]{"at_tps"}, "list of commands executed between two triggers").getStringList();
         config.save();
     }
 }

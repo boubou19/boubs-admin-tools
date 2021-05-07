@@ -17,9 +17,11 @@ public class EventHandler {
 
         if (tickCounter == AdminTools.configuration.delaySecondBetween2Trigger){
             tickCounter = 0;
-            if (AdminTools.configuration.useTPSCommand) {
+            if (AdminTools.configuration.useAutomatedCommands) {
                 ICommandManager icommandmanager = AdminTools.server.getCommandManager();
-                icommandmanager.executeCommand(fakeCommandSender, "at_tps");
+                for (String command : AdminTools.configuration.automatedCommands) {
+                    icommandmanager.executeCommand(fakeCommandSender, command);
+                }
             }
         }
     }
