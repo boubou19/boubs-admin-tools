@@ -1,0 +1,16 @@
+[
+{
+  "modid": "admintools",
+  "name": "boubs' admin tools",
+  "description": "small mod to do stuff server side",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["boubou_19"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
