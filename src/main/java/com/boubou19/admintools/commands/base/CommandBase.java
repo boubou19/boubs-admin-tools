@@ -1,34 +1,18 @@
 package com.boubou19.admintools.commands.base;
 
-import com.boubou19.admintools.AdminTools;
+import com.boubou19.admintools.commands.ICommandReloadable;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 
-import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
 
-public class CommandBase implements ICommand{
-    public static CommandBase instance = new CommandBase();
-    protected Path dumpPath;
+public class CommandBase implements ICommandReloadable{
+
     protected String commandName;
     protected List<String> commandAliases;
 
     public void reload(){
 
-    }
-
-    protected List<String> getStats (ICommandSender sender, String dimID){
-        return getStats(sender, dimID, "");
-    }
-
-    protected List<String> getStats (ICommandSender sender, String dimID, String filter){
-        List<String> stats = new ArrayList<>();
-        return stats;
-    }
-
-    protected void writeDump(List<String> dataList){
-        AdminTools.writeToDedicatedLogFile(dumpPath, dataList);
     }
 
     public int compareTo(ICommand p_compareTo_1_)
@@ -44,6 +28,7 @@ public class CommandBase implements ICommand{
     public String getCommandUsage(ICommandSender commandSender) {
         return "admintools.command." + getCommandName() + ".syntax";
     }
+
     public String getCommandName() {
 
         return commandName;

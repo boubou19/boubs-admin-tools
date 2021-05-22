@@ -8,11 +8,27 @@ import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.world.World;
 
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CommandBaseStats extends CommandBase {
+
     protected String dumpType;
+    protected Path dumpPath;
+
+    protected List<String> getStats (ICommandSender sender, String dimID){
+        return getStats(sender, dimID, "");
+    }
+
+    protected List<String> getStats (ICommandSender sender, String dimID, String filter){
+        List<String> stats = new ArrayList<>();
+        return stats;
+    }
+
+    protected void writeDump(List<String> dataList){
+        AdminTools.writeToDedicatedLogFile(dumpPath, dataList);
+    }
 
     protected int parseDim(ICommandSender sender, String dimID){
         int dim = 0;

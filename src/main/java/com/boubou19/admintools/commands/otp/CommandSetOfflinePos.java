@@ -3,7 +3,7 @@ package com.boubou19.admintools.commands.otp;
 import com.boubou19.admintools.AdminTools;
 import com.boubou19.admintools.JsonManager;
 import com.boubou19.admintools.PlayerCoords;
-import net.minecraft.command.ICommand;
+import com.boubou19.admintools.commands.base.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ChatComponentTranslation;
@@ -13,43 +13,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-public class CommandSetOfflinePos implements ICommand{
+public class CommandSetOfflinePos extends CommandBase{
     public static final CommandSetOfflinePos instance = new CommandSetOfflinePos();
-    private static final String commandName = "otp";
-    private static final List<String> commandAliases = Arrays.asList(new String[]{"at_otp"});
 
-    public void reload(){
-
-    }
-
-
-    public int compareTo(ICommand p_compareTo_1_)
-    {
-        return this.getCommandName().compareTo(p_compareTo_1_.getCommandName());
-    }
-
-    public int compareTo(Object p_compareTo_1_)
-    {
-        return this.compareTo((ICommand)p_compareTo_1_);
-    }
-
-    public String getCommandUsage(ICommandSender commandSender) {
-        return "admintools.command." + getCommandName() + ".syntax";
-    }
-    public String getCommandName() {
-        return commandName;
-    }
-
-    public int getRequiredPermissionLevel(){
-        return 2;
-    }
-
-    public boolean canCommandSenderUseCommand(ICommandSender commandSender){
-        return commandSender.canCommandSenderUseCommand(this.getRequiredPermissionLevel(), this.getCommandName());
-    }
-
-    public List getCommandAliases(){
-        return commandAliases;
+    public CommandSetOfflinePos() {
+        commandName = "otp";
+        commandAliases = Arrays.asList(new String[]{"at_otp"});
     }
 
     public void processCommand(ICommandSender sender, String[] arguments) {
@@ -94,10 +63,5 @@ public class CommandSetOfflinePos implements ICommand{
             return JsonManager.getMatchedPlayers(AdminTools.configuration.PlayerOfflineDataPath, args[0]);
         }
         return null;
-    }
-
-    public boolean isUsernameIndex(String[] p_82358_1_, int p_82358_2_)
-    {
-        return false;
     }
 }

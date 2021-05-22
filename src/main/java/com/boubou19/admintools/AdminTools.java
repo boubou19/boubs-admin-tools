@@ -1,7 +1,7 @@
 package com.boubou19.admintools;
 
-import com.boubou19.admintools.commands.CommandHandler;
 import com.boubou19.admintools.commands.FakeCommandSender;
+import com.boubou19.admintools.commands.stats.CommandHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;

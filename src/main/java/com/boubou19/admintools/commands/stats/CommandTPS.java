@@ -1,6 +1,7 @@
-package com.boubou19.admintools.commands;
+package com.boubou19.admintools.commands.stats;
 
 import com.boubou19.admintools.AdminTools;
+import com.boubou19.admintools.commands.Utils;
 import com.boubou19.admintools.commands.base.CommandBaseStats;
 import com.boubou19.admintools.integration.oc.LuaConverter;
 import com.google.common.base.Throwables;

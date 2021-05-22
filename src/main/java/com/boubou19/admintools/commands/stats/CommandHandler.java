@@ -1,4 +1,4 @@
-package com.boubou19.admintools.commands;
+package com.boubou19.admintools.commands.stats;
 
 import com.boubou19.admintools.commands.base.CommandBase;
 import com.boubou19.admintools.commands.base.CommandReload;

@@ -1,8 +1,6 @@
 package com.boubou19.admintools;
 
 import cofh.lib.util.helpers.EntityHelper;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import net.minecraft.command.ICommandManager;
@@ -11,7 +9,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IChatComponent;
-import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
 
 import java.nio.file.Path;

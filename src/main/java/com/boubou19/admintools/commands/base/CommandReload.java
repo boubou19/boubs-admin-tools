@@ -1,7 +1,7 @@
 package com.boubou19.admintools.commands.base;
 
 import com.boubou19.admintools.AdminTools;
-import com.boubou19.admintools.commands.CommandHandler;
+import com.boubou19.admintools.commands.stats.CommandHandler;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.util.ChatComponentTranslation;
 
