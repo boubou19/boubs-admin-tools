@@ -32,6 +32,7 @@ public class Config {
     public boolean mapPathSet;
     public List<Path> ocAdminPaths;
     public String[] automatedCommands;
+    public boolean enableModAnalyzer;
 
     public void initConfiguration(String rootInstance){
         cfgPath = Paths.get(rootInstance, "config", "boubsAdminTools.cfg").toString();
@@ -88,6 +89,8 @@ public class Config {
         automatedCommands = config.get(CATEGORY_COMMANDS, "command list", new String[]{"at_tps"}, "list of commands executed between two triggers").getStringList();
         playerOfflineDataPathString = config.get(CATEGORY_OFFLINE_DATA, "path", "offline pos", "path to the offline player data file. Default to ./offline pos").getString();
         PlayerOfflineDataPath = Paths.get(rootInstance, playerOfflineDataPathString).toAbsolutePath();
+        enableModAnalyzer = config.get(CATEGORY_MISC, "enable modlist analyser", true,"if true, display what mods are missing from both side as well as the mismatching version.").getBoolean();
+
         config.save();
         initFolders();
 

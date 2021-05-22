@@ -1,6 +1,9 @@
-package com.boubou19.admintools.commands;
+package com.boubou19.admintools;
 
+import com.boubou19.admintools.AdminTools;
 import net.minecraft.command.ICommandSender;
+
+import java.util.Map;
 
 public class Utils {
     public static String buildString(String[] stringArray){
@@ -13,5 +16,11 @@ public class Utils {
 
     public static boolean isServerSendingCommand(ICommandSender sender){
         return sender.getCommandSenderName().equals("Server") || sender.getCommandSenderName().equals("@");
+    }
+
+    public static void displayMap(Map<String, String> map){
+        for (Map.Entry<String, String> entry: map.entrySet()){
+            AdminTools.log.info(entry.getKey()+":"+entry.getValue());
+        }
     }
 }

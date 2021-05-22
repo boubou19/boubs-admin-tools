@@ -3,11 +3,15 @@ package com.boubou19.admintools;
 import com.boubou19.admintools.commands.FakeCommandSender;
 import com.boubou19.admintools.commands.stats.CommandHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.ModContainer;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.event.FMLServerStoppingEvent;
+import cpw.mods.fml.common.network.NetworkCheckHandler;
+import cpw.mods.fml.relauncher.Side;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.WorldServer;
@@ -20,6 +24,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 @Mod(modid = AdminTools.MODID, version = AdminTools.VERSION, acceptableRemoteVersions = "*")
 public class AdminTools
@@ -54,6 +60,38 @@ public class AdminTools
                 AdminTools.log.info("saving "+ ((EntityPlayer) player).getDisplayName()+"'s coords");
             }
         }
+    }
+
+    @NetworkCheckHandler
+    public boolean getModList(Map<String, String> mods, Side side){
+
+
+        if (side == Side.CLIENT && AdminTools.configuration.enableModAnalyzer) { // server side
+            Map<String, String> clientMods = new TreeMap<>();
+            Map<String, String> serverMods = new TreeMap<>();
+            Map<String, String> mistmatchMods = new TreeMap<>();
+            clientMods.putAll(mods);
+
+            Map<String, ModContainer> modMap = Loader.instance().getIndexedModList();
+            for (Map.Entry<String, ModContainer> entry : modMap.entrySet()) {
+                if(clientMods.containsKey(entry.getKey())){
+                    if (!entry.getValue().getDisplayVersion().equals(clientMods.get(entry.getKey()))){
+                        mistmatchMods.put(entry.getKey(),  entry.getValue().getDisplayVersion());
+                    }
+                    clientMods.remove(entry.getKey());
+                }
+                else{
+                    serverMods.put(entry.getKey(), entry.getValue().getDisplayVersion());
+                }
+            }
+            AdminTools.log.info("clientside only mods:");
+            Utils.displayMap(clientMods);
+            AdminTools.log.info("serverside only mods:");
+            Utils.displayMap(serverMods);
+            AdminTools.log.info("mismatching version from server:");
+            Utils.displayMap(mistmatchMods);
+        }
+        return true;
     }
 
 

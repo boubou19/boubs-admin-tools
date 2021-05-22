@@ -1,7 +1,7 @@
 package com.boubou19.admintools.commands.stats;
 
 import com.boubou19.admintools.AdminTools;
-import com.boubou19.admintools.commands.Utils;
+import com.boubou19.admintools.Utils;
 import com.boubou19.admintools.commands.base.CommandBaseStats;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
