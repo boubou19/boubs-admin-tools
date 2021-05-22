@@ -4,7 +4,6 @@ import com.boubou19.admintools.AdminTools;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 
-import java.io.File;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;

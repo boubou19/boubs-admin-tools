@@ -1,14 +1,13 @@
 package com.boubou19.admintools;
 
+import com.google.common.collect.Lists;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Path;
+import java.util.List;
 
 
 public class JsonManager {
@@ -55,6 +54,27 @@ public class JsonManager {
         return playerCoords;
     }
 
+    // credit to Namikon from AMDI for this method
+    public static List<String> getMatchedPlayers(Path offlineDataPath, String actualPrefix){
+            File saveFolder = new File(offlineDataPath.toAbsolutePath().toString());
+            File[] files = saveFolder.listFiles( new FilenameFilter(){
+                @Override
+                public boolean accept( File dir, String name )
+                {
+                    return name.startsWith( actualPrefix );
+                }
+            } );
+
+            List<String> result = Lists.newArrayList();
+
+            for( File f : files )
+            {
+                String name = f.getName();
+                result.add( name.substring(0, name.length() - 5 ) );
+            }
+            return result;
+    }
+
     public static boolean writeOfflinePlayerCoords(Path path, PlayerCoords playerCoords){
         boolean success = false;
         try (FileWriter file = new FileWriter(path.toAbsolutePath().toString())) {
@@ -70,56 +90,3 @@ public class JsonManager {
     }
 }
 
-class PlayerCoords{
-    public int x, y, z, dim;
-
-    PlayerCoords(JSONObject coords){
-        this.x = ((Long) coords.get("x")).intValue();
-        this.y = ((Long) coords.get("y")).intValue();
-        this.z = ((Long) coords.get("z")).intValue();
-        this.dim = ((Long) coords.get("dim")).intValue();
-    }
-
-    PlayerCoords(cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent event){
-        this.x = (int) event.player.posX;
-        this.y = (int) event.player.posY;
-        this.z = (int) event.player.posZ;
-        this.dim = event.player.dimension;
-    }
-
-    PlayerCoords(cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent event){
-        this.x = (int) event.player.posX;
-        this.y = (int) event.player.posY;
-        this.z = (int) event.player.posZ;
-        this.dim = event.player.dimension;
-    }
-
-    public int[] buildArray(){
-        return new int[]{this.x, this.y, this.z, this.dim};
-    }
-
-    public boolean sameCoordAs(PlayerCoords other){
-        int[] array = this.buildArray();
-        int[] otherArray = other.buildArray();
-        for (int i=0; i < 3; i++){
-            if (array[i] != otherArray[i]){
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public JSONObject getJsonObject(){
-        JSONObject obj = new JSONObject();
-        obj.put("x", this.x);
-        obj.put("y", this.y);
-        obj.put("z", this.z);
-        obj.put("dim", this.dim);
-        return obj;
-    }
-
-    @Override
-    public String toString() {
-        return " x:" + this.x + " y:" + this.y + " z:" + this.z + " dim:" + this.dim;
-    }
-}

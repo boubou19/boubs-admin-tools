@@ -1,18 +1,18 @@
 package com.boubou19.admintools;
 
 import cofh.lib.util.helpers.EntityHelper;
-import cpw.mods.fml.common.event.FMLMissingMappingsEvent;
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
-import cpw.mods.fml.common.network.FMLNetworkEvent;
-import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandManager;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IChatComponent;
+import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
-import net.minecraftforge.event.entity.player.PlayerEvent;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -53,6 +53,9 @@ public class EventHandler {
         PlayerCoords current = new PlayerCoords(event);
         Path offlineDataFile = Paths.get(AdminTools.configuration.PlayerOfflineDataPath.toString(), event.player.getDisplayName()+".json");
         PlayerCoords offline = JsonManager.readOfflinePlayerCoords(offlineDataFile);
+        if (offline == null){
+            return ;
+        }
         if (!offline.sameCoordAs(current)){
             if (offline.dim != current.dim){ //interdim tp
                 event.player.mountEntity((Entity) null);
@@ -65,6 +68,16 @@ public class EventHandler {
             event.player.setPositionAndUpdate((double) offline.x, (double) offline.y, (double) offline.z);
             IChatComponent message = new ChatComponentText("You have been teleported by an Operator.");
             event.player.addChatMessage(message);
+        }
+    }
+
+    @SubscribeEvent
+    public void onWorldUnload(net.minecraftforge.event.world.WorldEvent.Unload event){
+        for (Object player : event.world.playerEntities){
+            PlayerCoords playerCoords = new PlayerCoords((EntityPlayer) player);
+            Path offlineDataFile = Paths.get(AdminTools.configuration.PlayerOfflineDataPath.toString(), ((EntityPlayer) player).getDisplayName() + ".json");
+            JsonManager.writeOfflinePlayerCoords(offlineDataFile, playerCoords);
+
         }
     }
 }
