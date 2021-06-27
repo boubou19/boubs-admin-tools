@@ -33,6 +33,7 @@ public class Config {
     public List<Path> ocAdminPaths;
     public String[] automatedCommands;
     public boolean enableModAnalyzer;
+    public boolean enableOfflineTP;
 
     public void initConfiguration(String rootInstance){
         cfgPath = Paths.get(rootInstance, "config", "boubsAdminTools.cfg").toString();
@@ -73,7 +74,7 @@ public class Config {
         TELocationPath = Paths.get(rootInstance, logPathString, "te_location.log").toAbsolutePath();
         TPSPath = Paths.get(rootInstance, logPathString, "tps.log").toAbsolutePath();
 
-        delaySecondBetween2Trigger = config.get(CATEGORY_COMMANDS, "delay", 100, "Delay in seconds between 2 trigger of the commands").getInt();
+        delaySecondBetween2Trigger = config.get(CATEGORY_COMMANDS, "delay", 100, "Delay in ticks between 2 trigger of the commands").getInt();
         useAutomatedCommands = config.get(CATEGORY_COMMANDS, "use automated command", true, "if true enables automated commands triggers").getBoolean();
 
         String mapName = config.get(CATEGORY_MISC, "map name", "", "relative path to the map folder").getString();
@@ -89,6 +90,7 @@ public class Config {
         automatedCommands = config.get(CATEGORY_COMMANDS, "command list", new String[]{"at_tps"}, "list of commands executed between two triggers").getStringList();
         playerOfflineDataPathString = config.get(CATEGORY_OFFLINE_DATA, "path", "offline pos", "path to the offline player data file. Default to ./offline pos").getString();
         PlayerOfflineDataPath = Paths.get(rootInstance, playerOfflineDataPathString).toAbsolutePath();
+        enableOfflineTP = config.get(CATEGORY_OFFLINE_DATA, "enable offline tp commands", true,"if true, enable the offline teleporter command").getBoolean();
         enableModAnalyzer = config.get(CATEGORY_MISC, "enable modlist analyser", true,"if true, display what mods are missing from both side as well as the mismatching version.").getBoolean();
 
         config.save();

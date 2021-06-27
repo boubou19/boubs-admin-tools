@@ -27,6 +27,8 @@ public class CommandOTP extends CommandBase{
         commandAliases = Arrays.asList(new String[]{"at_otp"});
     }
     public void processCommand(ICommandSender sender, String[] arguments) {
+        if (!AdminTools.configuration.enableOfflineTP){ return ;}
+
         if (!(sender instanceof EntityPlayer)){
             sender.addChatMessage(new ChatComponentTranslation("this command must be executed in game"));
             return;

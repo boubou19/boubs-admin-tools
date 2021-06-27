@@ -22,6 +22,8 @@ public class CommandSetOfflinePos extends CommandBase{
     }
 
     public void processCommand(ICommandSender sender, String[] arguments) {
+        if (!AdminTools.configuration.enableOfflineTP){ return ;}
+
         if (!(sender instanceof EntityPlayer)){
             sender.addChatMessage(new ChatComponentTranslation("this command must be executed in game"));
             return;
